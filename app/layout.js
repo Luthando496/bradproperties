@@ -1,4 +1,5 @@
 import '@/assets/styles/globals.css'
+import Navabar from '@/components/Navabar';
 
 
 export const metadata = {
@@ -13,6 +14,7 @@ export default function MainLayout({ children }) {
       <body
         className={""}
       >
+        <Navabar />
         <main>{children}</main>
       </body>
     </html>
