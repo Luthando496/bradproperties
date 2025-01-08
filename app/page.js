@@ -1,13 +1,17 @@
 import React from 'react'
 import Link from 'next/link'
+import Hero from '@/components/Hero'
+import InfoBoxes from '@/components/InfoBoxes'
+import HomeProperties from '@/components/HomeProperties'
 
 
 const HomePage = () => {
   return (
-    <section className='h-screen bg-amber-500 flex w-full gap-36'>
-      <Link href={'/properties'}>Properties</Link>
-      <h1> HomePage </h1> 
-    </section>
+    <>
+    <Hero />
+    <InfoBoxes />
+    <HomeProperties />
+    </>
   )
 }
 
