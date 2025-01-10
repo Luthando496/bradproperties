@@ -3,7 +3,7 @@ import PropertyCard from '@/components/PropertyCard'
 import properties from "@/properties.json"
 
 
-const PropertiesPage = () => {
+const PropertiesPage = async() => {
   return (
     <section className='py-6 px-4'>
       <div className="container-xl lg:container mx-auto px-6 py-6">
