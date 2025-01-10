@@ -1,4 +1,4 @@
-import {Schema,model} from "mongoose";
+import {Schema,model, models} from "mongoose";
 
 
 const propertySchema = new Schema(
@@ -58,6 +58,6 @@ const propertySchema = new Schema(
 })
 
 
-const propertyModel =  model(propertySchema)
+const PropertyModel = models.Property || model("Property",propertySchema);
 
-export default propertyModel
+export default PropertyModel
