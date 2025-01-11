@@ -5,13 +5,16 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import logo from '@/assets/images/logo-white.png';
 import profileDefault from '@/assets/images/profile.png';
-import { FaGoogle } from 'react-icons/fa';
+import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
 
 
 const Navbar = () => {
   const {data:session}  = useSession();
+  console.log(session,"navbar session")
+
+  const profileImage = session?.user?.image
 
 
 
@@ -115,7 +118,8 @@ const Navbar = () => {
                 key={index} 
                 onClick={()=> signIn(provider.id)}
                 className='flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'>
-                  <FaGoogle className='text-white mr-2' />
+                  {provider.id === "google" && <FaGoogle className='text-white mr-2' />}
+                  {provider.id === "github" && <FaGithub className='text-white mr-2' />}
                   <span>Login or Register</span>
                 </button>
 
@@ -169,8 +173,10 @@ const Navbar = () => {
                     <span className='sr-only'>Open user menu</span>
                     <Image
                       className='h-8 w-8 rounded-full'
-                      src={profileDefault}
-                      alt=''
+                      src={profileImage || profileDefault}
+                      alt='profile image'
+                      width={40}
+                      height={40}
                     />
                   </button>
                 </div>
@@ -204,6 +210,11 @@ const Navbar = () => {
                       Saved Properties
                     </Link>
                     <button
+                    onClick={() => {
+
+                      setIsProfileMenuOpen(false)
+                      signOut()
+                    }}
                       className='block px-4 py-2 text-sm text-gray-700'
                       role='menuitem'
                       tabIndex='-1'
