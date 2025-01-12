@@ -4,7 +4,7 @@ import React from 'react'
 const PropertyImages = ({images}) => {
     console.log(images[4])
   return (
-    <section className='bg-blue-50 p-4' >
+    <section className='bg-blue-50 shadow-2xl shadow-amber-700 rounded-t-xl p-4' >
 
         <div className="container mx-auto">
                 {images.length === 3 ? (
@@ -37,7 +37,7 @@ const PropertyImages = ({images}) => {
                     </div>
 
                     <div className="w-full my-8-4 h-[400px]">
-                    <Image alt="property-images" src={images[2]}  className='h-[420px] object-cover w-full rounded-md'
+                    <Image alt="property-images" src={images[2]}  className='h-[420px] object-cover  w-full rounded-md'
                         width={1800} height={400} priority={true} />
                     </div>
 
