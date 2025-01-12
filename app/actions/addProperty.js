@@ -1,13 +1,29 @@
 "use server"
 
+import connectDB from "@/config/database"
+import PropertyModel from "@/models/Property";
+import { getSessionUser } from "@/utils/getSession";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 
 const addProperty = async(formData)=>{
+    await connectDB();
+
+    const sessionUser = await getSessionUser();
+
+    if(!sessionUser || !sessionUser.userId){
+        throw new Error("User Id is required");
+    }
+    const {userId} = sessionUser;
+
+
     const amenities = formData.getAll("amenities")
 
     const images = formData.getAll("images").filter((image)=> image.name !== "" ).map((image)=> image.name)
 
     const propertyData = {
+        owner:userId,
         type:formData.get("type"),
         name:formData.get("name"),
         description:formData.get("description"),
@@ -34,8 +50,11 @@ const addProperty = async(formData)=>{
         images
     }
 
-    console.log(propertyData)
+    const newProperty = new PropertyModel(propertyData);
+    await newProperty.save();
 
+    revalidatePath('/','layout');
+    redirect(`/properties/${newProperty._id}`)
 }
 
 export default addProperty

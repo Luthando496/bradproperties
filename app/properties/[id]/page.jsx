@@ -12,7 +12,7 @@ const PropertyPage = async({params}) => {
 
   return (
     <>
-      <PropertyHeaderImage propertyImage={property.images[1]}  />
+      <PropertyHeaderImage propertyImage={property.images[0]}  />
       <section>
       <div className="container m-auto py-6 px-6">
         <Link
