@@ -1,6 +1,7 @@
 "use server"
 
 import connectDB from "@/config/database"
+import cloudinary from "@/models/cloudinary";
 import PropertyModel from "@/models/Property";
 import { getSessionUser } from "@/utils/getSession";
 import { revalidatePath } from "next/cache";
@@ -20,7 +21,7 @@ const addProperty = async(formData)=>{
 
     const amenities = formData.getAll("amenities")
 
-    const images = formData.getAll("images").filter((image)=> image.name !== "" ).map((image)=> image.name)
+    const images = formData.getAll("images").filter((image)=> image.name !== "" )
 
     const propertyData = {
         owner:userId,
@@ -47,8 +48,27 @@ const addProperty = async(formData)=>{
             email:formData.get("seller_info.email"),
             phone:formData.get("seller_info.phone"),
         },
-        images
+
     }
+
+    const imageUrls = []
+    for (const imageFile of images) {
+        const imageBuffer = await imageFile.arrayBuffer();
+        const imageArray = Array.from(new Uint8Array(imageBuffer))
+        const imageData = Buffer.from(imageArray);
+
+        //convert to base64 images
+        const imageBase64 = imageData.toString("base64")
+        //upload
+
+        const result = await cloudinary.uploader.upload(`data:image/png;base64,${imageBase64}`,{
+            folder:"propertyPulseBrad"
+        })
+        imageUrls.push(result.secure_url)
+    }
+
+    propertyData.images = imageUrls;
+
 
     const newProperty = new PropertyModel(propertyData);
     await newProperty.save();

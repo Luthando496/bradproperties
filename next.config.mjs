@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    experimental: {
+        serverActions: {
+          bodySizeLimit: '4mb' // Or any other appropriate limit
+        }
+      },
     images:{
         remotePatterns:[
             {
@@ -12,6 +17,11 @@ const nextConfig = {
                 hostname:'avatars.githubusercontent.com',
                 pathname:'**'
             },
+            {
+                protocol:'https',
+                hostname:'res.cloudinary.com',
+                pathname:'**'
+            }
                 
         ]
     }
