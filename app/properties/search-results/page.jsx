@@ -33,7 +33,7 @@ const SearchResultsPage = async({searchParams:{location,propertyType}}) => {
     const propertiesQuery = await PropertyModel.find(query).lean();
     const properties = JSON.parse(JSON.stringify(propertiesQuery))
 
-    console.log(properties)
+    // console.log(properties)
 
   return (
     <>
