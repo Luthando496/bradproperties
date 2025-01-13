@@ -12,19 +12,18 @@ import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
 const Navbar = () => {
   const {data:session}  = useSession();
-  console.log(session,"navbar session")
-
+  
   const profileImage = session?.user?.image
-
+  
 
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [providers, setProviders] = useState(null);
-
+  
   const pathname = usePathname();
-
-
+  
+  
   useEffect(()=>{
     const setAuthProviders = async()=>{
       const provider = await getProviders();
@@ -33,7 +32,8 @@ const Navbar = () => {
 
     setAuthProviders();
   },[])
-
+  
+  console.log(providers,"providers")
   return (
     <nav className='bg-blue-700 border-b border-blue-500'>
       <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
@@ -118,7 +118,7 @@ const Navbar = () => {
                 key={index} 
                 onClick={()=> signIn(provider.id)}
                 className='flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'>
-                  {provider.id === "google" && <FaGoogle className='text-white mr-2' />}
+                  {/* {provider.id === "google" && <FaGoogle className='text-white mr-2' />} */}
                   {provider.id === "github" && <FaGithub className='text-white mr-2' />}
                   <span>Login or Register</span>
                 </button>
