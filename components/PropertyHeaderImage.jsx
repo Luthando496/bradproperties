@@ -1,23 +1,22 @@
-import Image from 'next/image'
+import Image from "next/image";
 
-const PropertyHeaderImage = ({propertyImage}) => {
+const PropertyHeaderImage = ({ propertyImage }) => {
   return (
     <section>
-    <div className="container-xl m-auto">
-      <div className="grid grid-cols-1">
-        <Image
-          src={propertyImage}
-
-          alt=""
-          className="object-cover h-[400px] w-full"
-          width="0"
-          height="0"
-          sizes='100vw'
-        />
+      <div className="container-xl m-auto">
+        <div className="grid grid-cols-1">
+          <Image
+            src={propertyImage}
+            alt=""
+            className="object-cover h-[400px] w-full"
+            width="0"
+            height="0"
+            sizes="100vw"
+          />
+        </div>
       </div>
-    </div>
-  </section>
-  )
-}
+    </section>
+  );
+};
 
-export default PropertyHeaderImage
+export default PropertyHeaderImage;

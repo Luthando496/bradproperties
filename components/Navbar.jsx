@@ -197,6 +197,7 @@ const Navbar = () => {
                       role='menuitem'
                       tabIndex='-1'
                       id='user-menu-item-0'
+                      onClick={()=> setIsProfileMenuOpen(false)}
                     >
                       Your Profile
                     </Link>
@@ -205,6 +206,7 @@ const Navbar = () => {
                       className='block px-4 py-2 text-sm text-gray-700'
                       role='menuitem'
                       tabIndex='-1'
+                      onClick={()=> setIsProfileMenuOpen(false)}
                       id='user-menu-item-2'
                     >
                       Saved Properties

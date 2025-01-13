@@ -22,7 +22,6 @@ const ProfilePage = async() => {
     const properties = await PropertyModel.find({owner:userId}).lean();
     const plainProperties = JSON.parse(JSON.stringify(properties))
 
-    console.log(plainProperties)
 
 
     return (
